@@ -12,7 +12,6 @@ Aplicación Java web para gestionar citas médicas de MediSoft usando Servlets, 
 6. **Versionamiento y estándar:** Git; paquetes en minúscula, clases `UpperCamelCase`, métodos y variables `lowerCamelCase`, constantes `UPPER_SNAKE_CASE`, separación MVC y cierre de recursos con try-with-resources.
 
 ## Estructura
-
 ```text
 src/main/java/co/medisoft/citas/
 ├── web/CitaServlet.java                  # Controlador y métodos doGet/doPost
