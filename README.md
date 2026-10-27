@@ -39,25 +39,26 @@ Servlet API se declara con alcance `provided`, porque Tomcat ya incluye esa API.
 ## Preparar MySQL
 
 1. Inicia el servicio MySQL.
-2. Ejecuta `database/schema.sql` desde MySQL Workbench para crear `medisoft` y `citas`.
+2. Ejecuta `database/schema.sql` desde MySQL Workbench para crear la base independiente `medisoft_ev02` y su tabla `citas`. EV02 no lee ni modifica la base `medisoft` de EV01.
 3. Crea un usuario de aplicación con permisos CRUD:
 
 ```sql
-CREATE USER 'medisoft_app'@'localhost' IDENTIFIED BY 'CAMBIA_ESTA_CLAVE';
-GRANT SELECT, INSERT, UPDATE, DELETE ON medisoft.citas TO 'medisoft_app'@'localhost';
+CREATE USER IF NOT EXISTS 'medisoft_ev02_app'@'localhost' IDENTIFIED BY 'CAMBIA_ESTA_CLAVE';
+ALTER USER 'medisoft_ev02_app'@'localhost' IDENTIFIED BY 'CAMBIA_ESTA_CLAVE';
+GRANT SELECT, INSERT, UPDATE, DELETE ON medisoft_ev02.citas TO 'medisoft_ev02_app'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-Reemplaza la contraseña de ejemplo por una contraseña local. No la agregues a Git.
+Reemplaza la contraseña de ejemplo por una contraseña local. Esta es una cuenta distinta a la de EV01. No agregues la contraseña a Git.
 
 ## Configurar conexión local
 
 En la misma ventana PowerShell desde la que arrancarás Tomcat, configura:
 
 ```powershell
-$env:MEDISOFT_DB_URL = 'jdbc:mysql://localhost:3306/medisoft?serverTimezone=UTC'
-$env:MEDISOFT_DB_USER = 'medisoft_app'
-$secureDbPassword = Read-Host 'Contraseña de medisoft_app' -AsSecureString
+$env:MEDISOFT_DB_URL = 'jdbc:mysql://localhost:3306/medisoft_ev02?serverTimezone=UTC'
+$env:MEDISOFT_DB_USER = 'medisoft_ev02_app'
+$secureDbPassword = Read-Host 'Contraseña de medisoft_ev02_app' -AsSecureString
 $env:MEDISOFT_DB_PASSWORD = (New-Object System.Net.NetworkCredential('', $secureDbPassword)).Password
 ```
 
@@ -94,7 +95,7 @@ La primera compilación necesita acceso a Maven Central para descargar dependenc
 
 | Acción | Solicitud | Responsable |
 |---|---|---|
-| Ver citas | `GET /citas` | `doGet` consulta el DAO y reenvía a `lista-citas.jsp` |
+| Ver citas | `GET /citas` | `doGet` consulta el DAO de `medisoft_ev02` y reenvía a `lista-citas.jsp` |
 | Buscar por ID | `GET /citas?accion=buscar&id=...` | `doGet` lee el parámetro GET y consulta el DAO |
 | Abrir formulario | `GET /citas?accion=nuevo` | `doGet` prepara y muestra `formulario-cita.jsp` |
 | Abrir edición | `GET /citas?accion=editar&id=...` | `doGet` recupera la cita y muestra el formulario |
@@ -116,3 +117,5 @@ Escribe la URL remota final en `repositorio.txt` antes de entregar la carpeta co
 ## Pruebas manuales
 
 Consulta `docs/protocolo-pruebas.md` para los escenarios de registro, consulta GET, actualización, eliminación, validación y comprobación de Git.
+
+

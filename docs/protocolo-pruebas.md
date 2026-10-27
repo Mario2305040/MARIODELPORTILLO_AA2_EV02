@@ -1,6 +1,6 @@
 # Protocolo de pruebas manuales — MediSoft EV02
 
-Completa el campo de resultado durante la ejecución local. Usa datos ficticios. Requisito para ejecutar: MySQL configurado, variables `MEDISOFT_DB_*` activas, WAR desplegado en Tomcat y navegador en `http://localhost:8080/medisoft-citas/citas`.
+Completa el campo de resultado durante la ejecución local. Usa datos ficticios. Requisito para ejecutar: base independiente `medisoft_ev02` configurada, variables `MEDISOFT_DB_*` activas con el usuario `medisoft_ev02_app`, WAR desplegado en Tomcat y navegador en `http://localhost:8080/medisoft-citas/citas`.
 
 | ID | Escenario | Pasos | Resultado esperado | Resultado / fecha |
 |---|---|---|---|---|
@@ -24,3 +24,4 @@ Completa el campo de resultado durante la ejecución local. Usa datos ficticios.
 - Ejecutado por: ______________________________________________
 - Fecha: ______________________________________________________
 - Observaciones / errores: _____________________________________
+

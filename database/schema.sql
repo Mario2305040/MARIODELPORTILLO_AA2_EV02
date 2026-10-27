@@ -1,8 +1,8 @@
-CREATE DATABASE IF NOT EXISTS medisoft
+CREATE DATABASE IF NOT EXISTS medisoft_ev02
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
-USE medisoft;
+USE medisoft_ev02;
 
 CREATE TABLE IF NOT EXISTS citas (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -17,3 +17,4 @@ CREATE TABLE IF NOT EXISTS citas (
     INDEX idx_citas_documento (documento_paciente),
     INDEX idx_citas_fecha_hora (fecha_hora)
 );
+
