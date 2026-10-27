@@ -14,6 +14,7 @@ Completa el campo de resultado durante la ejecución local. Usa datos ficticios.
 | P08 | Estado inválido | Enviar un estado distinto de PROGRAMADA, ATENDIDA o CANCELADA. | El Servlet rechaza el valor y presenta un mensaje de validación. | Pendiente |
 | P09 | Versionamiento | Ejecutar `git status --short --branch` y `git log --oneline`. | Se identifica la rama y los commits del proyecto sin archivos secretos. | Pendiente |
 
+
 ## Registro de ejecución
 
 - Equipo / sistema operativo: __________________________________
